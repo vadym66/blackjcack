@@ -24,8 +24,11 @@ namespace BlackJack
             public SuitName Suit;
             public CardNumber Card;
         }
+        
         static void Main(string[] args)
         {
+            
+
             CardStruct[] deckOfCards = new CardStruct[]
             {
                new CardStruct {Card = CardNumber.six, Suit = SuitName.club},
@@ -69,7 +72,25 @@ namespace BlackJack
                new CardStruct { Card = CardNumber.ace, Suit = SuitName.heart },
             };
 
+            Random rnd = new Random();
 
+            for (int i = deckOfCards.Length; i > 1; i--)
+            {
+                
+                int j = rnd.Next(i); 
+                var tmp = deckOfCards[j];
+                deckOfCards[j] = deckOfCards[i - 1];
+                deckOfCards[i - 1] = tmp;
+            }
+            for (int i = 0; i < deckOfCards.Length; i++)
+            {
+                Console.WriteLine($"[{i}] ===> {deckOfCards[i].Card} {deckOfCards[i].Suit}");
+            }
         }
+
+        
+
+
+
     }
 }
