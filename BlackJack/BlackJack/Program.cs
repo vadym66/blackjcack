@@ -71,21 +71,33 @@ namespace BlackJack
                new CardStruct { Card = CardNumber.king, Suit = SuitName.heart },
                new CardStruct { Card = CardNumber.ace, Suit = SuitName.heart },
             };
+            Console.WriteLine("================================");
+            //Random rnd = new Random();
 
-            Random rnd = new Random();
+            //for (int i = deckOfCards.Length; i > 1; i--)
+            //{
 
-            for (int i = deckOfCards.Length; i > 1; i--)
-            {
-                
-                int j = rnd.Next(i); 
-                var tmp = deckOfCards[j];
-                deckOfCards[j] = deckOfCards[i - 1];
-                deckOfCards[i - 1] = tmp;
-            }
-            for (int i = 0; i < deckOfCards.Length; i++)
-            {
-                Console.WriteLine($"[{i}] ===> {deckOfCards[i].Card} {deckOfCards[i].Suit}");
-            }
+            //    int j = rnd.Next(i); 
+            //    var tmp = deckOfCards[j];
+            //    deckOfCards[j] = deckOfCards[i - 1];
+            //    deckOfCards[i - 1] = tmp;
+            //}
+            Console.WriteLine("================================");
+            //for (int i = 0; i < deckOfCards.Length; i++)
+            //{
+            //    //Console.WriteLine($"[{i}] ===> {deckOfCards[i].Card} {deckOfCards[i].Suit}");
+            //}
+            //for (int i = 0; i < deckOfCards.Length; i++)
+            //{
+            //    string ace = "ace";
+            //    CardNumber tmp = (CardNumber)Enum.Parse(typeof(CardNumber), ace);
+            //    if (deckOfCards[i].Card == tmp)
+            //    {
+            //        Console.WriteLine($"[{i}] ======>> {deckOfCards[i].Card} {deckOfCards[i].Suit}");
+            //    }
+            //}
+            Console.WriteLine("================================");
+            
         }
 
         
