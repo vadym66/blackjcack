@@ -72,24 +72,7 @@ namespace BlackJack
                new CardStruct { Card = CardNumber.ace, Suit = SuitName.heart },
             };
             Console.WriteLine("================================");
-
-            //for (int i = 0; i < deckOfCards.Length; i++)
-            //{
-            //    //Console.WriteLine($"[{i}] ===> {deckOfCards[i].Card} {deckOfCards[i].Suit}");
-            //}
-            //for (int i = 0; i < deckOfCards.Length; i++)
-            //{
-            //    string ace = "ace";
-            //    CardNumber tmp = (CardNumber)Enum.Parse(typeof(CardNumber), ace);
-            //    if (deckOfCards[i].Card == tmp)
-            //    {
-            //        Console.WriteLine($"[{i}] ======>> {deckOfCards[i].Card} {deckOfCards[i].Suit}");
-            //    }
-            //}
-
-            Console.WriteLine("================================");
-
-            // Цикл который перемешивает колоду
+                                                          
             Random rnd = new Random();
 
             for (int i = deckOfCards.Length; i > 1; i--)
@@ -99,29 +82,62 @@ namespace BlackJack
                 var tmp = deckOfCards[j];
                 deckOfCards[j] = deckOfCards[i - 1];
                 deckOfCards[i - 1] = tmp;
-            }
+            } // shuffling the deck of cards
 
             Console.WriteLine("================================");
-            
-            // Собственно начало игры 
-            string quest = "";
-            var res = 0;
 
-            Console.WriteLine($"{deckOfCards[0].Card} {deckOfCards[0].Suit}");
-            Console.WriteLine($"{deckOfCards[1].Card} {deckOfCards[1].Suit}");
-            res = (int)deckOfCards[0].Card + (int)deckOfCards[1].Card;
+            var resultFirst = 0;
+            var resultSecond = 0;
+            string question = "";
 
-            Console.WriteLine("do you need more ?");
-            quest = Console.ReadLine();
-            while (quest == "yes" && res < 21)
+            for (int i = 0; i < deckOfCards.Length; i++)
             {
-                for (int i = 2; i < deckOfCards.Length; i++)
+                if (i < 2)
                 {
-                    res += (int)deckOfCards[i].Card;
                     Console.WriteLine($"{deckOfCards[i].Card} {deckOfCards[i].Suit}");
-                    Console.WriteLine(res);
+                    resultFirst += (int)deckOfCards[i].Card;
+
                 }
 
+            }
+            Console.WriteLine(resultFirst);
+            for (int i = 2; i < deckOfCards.Length; i++)
+            {
+                if (i < 4)
+                {
+                    resultSecond += (int)deckOfCards[i].Card;
+                }
+            }
+            int l = 3;
+            int k = l;
+            do
+            {
+
+                Console.WriteLine("do you want more");
+                question = Console.ReadLine();
+
+                if (question == "yes" && resultFirst < 21)
+                {
+                    
+                    l++;
+                    Console.WriteLine($"{deckOfCards[l].Card} {deckOfCards[l].Suit}");
+                    resultFirst += (int)deckOfCards[l].Card;
+                    Console.WriteLine(resultFirst);
+
+                    
+                    k++;
+                    resultSecond += (int)deckOfCards[k].Card;
+                }
+            } while (question == "yes" && resultFirst < 21);
+            if (resultFirst > resultSecond)
+            {
+                Console.WriteLine("You have won");
+                Console.WriteLine(resultSecond);
+            }
+            else
+            {
+                Console.WriteLine("compter has wone");
+                Console.WriteLine(resultSecond);
             }
         }
 
