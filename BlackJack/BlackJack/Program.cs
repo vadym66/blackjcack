@@ -217,7 +217,7 @@ namespace BlackJack
                         scoreSecondPlayer++;
                     }
                 }
-                else if (resultFirst < 21 && resultFirst > resultSecond)
+                else if (resultFirst < 21 && resultFirst > resultSecond) 
                 {
                     Console.WriteLine($"You have won: " + resultFirst);                    
                     scoreFirstPlayer++;
