@@ -77,6 +77,8 @@ namespace BlackJack
             int scoreFirstPlayer = 0;
             int scoreSecondPlayer = 0;
 
+            Console.WriteLine("Welcome to BlackJack");
+            Console.WriteLine("-------------------");
             do
             {                
                 Random rnd = new Random();
@@ -89,69 +91,116 @@ namespace BlackJack
                     deckOfCards[j] = deckOfCards[i - 1];
                     deckOfCards[i - 1] = tmp;
                 } // shuffling the deck of cards
-
                 
-
                 var resultFirst = 0;
                 var resultSecond = 0;
-                
-                for (int i = 0; i < deckOfCards.Length; i++) // first two cards recived player 
+
+                Console.WriteLine("Choose who recives cards first \n if You - Press '1' \n if Computer - Press '2'");
+                Console.WriteLine("-------------------");
+                int switchCase = int.Parse(Console.ReadLine());
+                switch (switchCase)
                 {
-                    if (i < 2)
-                    {
-                        Console.WriteLine($"{deckOfCards[i].Card} {deckOfCards[i].Suit}");
-                        resultFirst += (int)deckOfCards[i].Card;
-
-                    }
-
-                }
-                Console.WriteLine(resultFirst);
-                for (int i = 2; i < deckOfCards.Length; i++)  // first two cards recived computer
-                {
-                    if (i < 4)
-                    {
-                        resultSecond += (int)deckOfCards[i].Card;
-                    }
-                }
-
-                int l = 3; //continue initilizatian of array 
-                int k = l;
-
-                if (resultFirst != 21 && resultSecond != 21)
-                {
-                    do
-                    {
-
-                        Console.WriteLine("do you want more ?");
-                        question = Console.ReadLine();
-
-                        if (question == "yes" && resultFirst < 21)
+                    case 1:
+                        for (int i = 0; i < deckOfCards.Length; i++) // first two cards recived player 
                         {
-
-                            l++;
-                            Console.WriteLine($"{deckOfCards[l].Card} {deckOfCards[l].Suit}");
-                            resultFirst += (int)deckOfCards[l].Card;
-                            Console.WriteLine(resultFirst);
-
-
-                            k++;
-                            resultSecond += (int)deckOfCards[k].Card;
+                            if (i < 2)
+                            {
+                                Console.WriteLine($"{deckOfCards[i].Card} {deckOfCards[i].Suit}");
+                                resultFirst += (int)deckOfCards[i].Card;
+                            }
                         }
-                    } while (question == "yes" && resultFirst < 21);
-                    
+                        Console.WriteLine(resultFirst + "\n");
+
+                        for (int i = 2; i < deckOfCards.Length; i++)  // first two cards recived computer
+                        {
+                            if (i < 4)
+                            {
+                                resultSecond += (int)deckOfCards[i].Card;
+                            }
+                        }
+
+                        int l = 3; //continue initilizatian of array 
+                        int k = l;
+
+                        if (resultFirst != 21 && resultSecond != 21)
+                        {
+                            do
+                            {
+
+                                Console.WriteLine("do you want more ?");
+                                question = Console.ReadLine();
+                               
+                                if (question == "yes" && resultFirst <= 21)
+                                {
+
+                                    l++;
+                                    Console.WriteLine($"{deckOfCards[l].Card} {deckOfCards[l].Suit}");
+                                    resultFirst += (int)deckOfCards[l].Card;
+                                    Console.WriteLine(resultFirst);
+
+
+                                    k++;
+                                    resultSecond += (int)deckOfCards[k].Card;
+                                }
+                            } while (question == "yes" && resultFirst < 21 && resultSecond < 21);
+
+                        }
+                        break;
+                    case 2:
+                        for (int i = 0; i < deckOfCards.Length; i++)  // first two cards recived computer
+                        {
+                            if (i < 2)
+                            {
+                                Console.WriteLine($"{deckOfCards[i].Card} {deckOfCards[i].Suit}");
+                                resultSecond += (int)deckOfCards[i].Card;
+                            }
+                        }                        
+                        for (int i = 2; i < deckOfCards.Length; i++)  // first two cards recived player
+                        {
+                            if (i < 4)
+                            {
+                                resultFirst += (int)deckOfCards[i].Card;
+                            }
+                        }
+                        Console.WriteLine(resultFirst);
+
+                        int n = 3; //continue initilizatian of array 
+                        int m = n;
+
+                        if (resultFirst != 21 && resultSecond != 21)
+                        {
+                            do
+                            {
+                                if (resultSecond < 21)
+                                {
+                                    n++;
+                                    resultSecond += (int)deckOfCards[n].Card;
+                                }
+                                
+                                Console.WriteLine("do you want more ?");
+                                question = Console.ReadLine();
+
+                                if (question == "yes" && resultFirst < 21)
+                                {
+                                    m++;
+                                    Console.WriteLine($"{deckOfCards[m].Card} {deckOfCards[m].Suit}");
+                                    resultFirst += (int)deckOfCards[m].Card;
+                                    Console.WriteLine(resultFirst);
+                                }
+                            } while (question == "yes" && resultFirst < 21 && resultSecond < 21);
+                        }
+                        break;                        
                 }
                 if (resultFirst > 21 || resultSecond > 21)
                 {
                     if (resultFirst < resultSecond)
                     {
-                        Console.WriteLine("You have won");
-                        Console.WriteLine(resultSecond);
+                        Console.WriteLine($"You have won: " + resultFirst);                       
                         scoreFirstPlayer++;
                     }
                     else
                     {
-                        Console.WriteLine("compter has wone");
-                        Console.WriteLine(resultSecond);
+                        Console.WriteLine($"compter has wone: " + resultSecond);                        
                         scoreSecondPlayer++;
                     }
                 }
@@ -159,20 +208,18 @@ namespace BlackJack
                 {
                     if (resultFirst == 21)
                     {
-                        Console.WriteLine("You have won");
+                        Console.WriteLine("You have won with 21 score");
                         scoreFirstPlayer++;
                     }
                     else
                     {
-                        Console.WriteLine("compter has wone");
-                        Console.WriteLine(resultSecond);
+                        Console.WriteLine("compter has wone with 21 score");                        
                         scoreSecondPlayer++;
                     }
                 }
                 else if (resultFirst < 21 && resultFirst > resultSecond)
                 {
-                    Console.WriteLine("You have won");
-                    Console.WriteLine(resultSecond);
+                    Console.WriteLine($"You have won: " + resultFirst);                    
                     scoreFirstPlayer++;
                 }
                 else if (resultFirst == resultSecond)
@@ -181,15 +228,16 @@ namespace BlackJack
                 }
                 else
                 {
-                    Console.WriteLine("compter has wone");
-                    Console.WriteLine(resultSecond);
+                    Console.WriteLine($"compter has wone: " + resultSecond);                                        
                     scoreSecondPlayer++;
                 }
+
                 Console.WriteLine("do you want to continue ? yes/no");
                 questionExit = Console.ReadLine();
-            } while (questionExit == "yes");
-            Console.WriteLine($"You have won:" + scoreFirstPlayer);
-            Console.WriteLine("Computer has won", + scoreSecondPlayer);
+            }
+            while (questionExit == "yes");
+            Console.WriteLine($"\nYou have won:" + scoreFirstPlayer);
+            Console.WriteLine($"Computer has won: " + scoreSecondPlayer);
         }                        
     }
 }
